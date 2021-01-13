@@ -4,12 +4,32 @@ import Form from './Form'
 
 import ListContainer from './ListContainer'
 
+import SearchBar from './SearchBar'
+
 
 class App extends React.Component{
 
   state={
-    masterList: []
+    masterList: [],
+    searchTerm: ""
   }
+
+  handleSearchTerm = (termFromChild) => {
+    this.setState({
+        searchTerm: termFromChild
+        //[evt.target.name]:evt.target.value  and change termfromchild to evt
+    })
+  }
+
+  decideWhichArrayToReturn = () => {
+    let  anArray = this.state.masterList.filter((singleList) => {
+         return singleList.list_name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+         //add another || singleList.items.some(item=>item.name.includes(this.state.searchTerm))
+    })
+    return anArray
+}
+
+
 
   componentDidMount(){
       fetch("http://localhost:3000/lists")
@@ -73,6 +93,7 @@ class App extends React.Component{
     })
         .then(r => r.json())
         .then((updatedList) => {
+            console.log(updatedList)
                 //here is how you modfiy state
             let copyOfMasterList = this.state.masterList.map((singleList) => {
                 // return (singleList.id === updatedList.id ? updatedList : singleList)
@@ -86,19 +107,28 @@ class App extends React.Component{
                 masterList: copyOfMasterList
             })
         })
-
     }
   
+    
+
+
   render() {
+    // console.log(this.decideWhichArrayToReturn()) => [{...}]
+    // console.log(this.decideWhichArrayToReturn())
+
     return (
       <div className="App">
         <h1>Listings</h1>
         <Form
             addOneList={this.addOneList}
         />
+        <SearchBar
+            searchTerm={this.state.searchTerm}
+            handleSearchTerm={this.handleSearchTerm}
+        />
         <ListContainer 
             title="Lists Of lists!"
-            lists={this.state.masterList}
+            lists={this.decideWhichArrayToReturn()}
             deleteAlist={this.deleteAlist}
             updateOneList={this.updateOneList}
         />

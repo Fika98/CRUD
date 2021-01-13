@@ -7,15 +7,34 @@ class List extends React.Component{
     //initial state
     // SHOULD NOT BE WRITING THIS.PROPS ANYWHERE IN YOUR STATE OBJ
   state = {
-    showlist: false
+    showlist: false,
+    status: "liked"
     
   }
 
   handleContriibution = (evt) =>{
-    let newContributionValue = this.props.lists.contribution + 1;
+    let randomNumber = Math.random() < 0.5? 20 : -15
+    let newContributionValue = this.props.lists.contribution + randomNumber;
     let contributionId = this.props.lists.id;
     
     this.props.updateOneList(contributionId, newContributionValue)
+  }
+
+  componentDidUpdate(prevProps, preState){
+    //your setStates should be wrapped with an if statement
+    //dont have else plz
+    //has acces 4 => prevProps, preState, this.state, this.props
+    if(this.props.lists.contribution > prevProps.lists.contribution) {
+        this.setState({
+            status: "liked"
+        })
+    }
+    if(this.props.lists.contribution < prevProps.lists.contribution){
+        this.setState({
+            status: "disliked"
+        })
+    }
+
   }
 
   handleShowingList = (evt) => {
@@ -41,7 +60,7 @@ class List extends React.Component{
                                     //when we invoke a function in render, we care about the return value
       return(
         <>
-          <li className = "container">
+          <li className = {`container ${this.state.status}`}>
             <button className = "deleteBtn" onClick={this.handleClick}>X</button>
             <img
             className="img" 
