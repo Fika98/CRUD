@@ -14,6 +14,7 @@ let ListContainer = (props) => {
                     key={singularListPOJO.id}
                     deleteAlist={props.deleteAlist}
                     updateOneList={props.updateOneList}
+                    addItemToOneList={props.addItemToOneList}
          />
     })
 

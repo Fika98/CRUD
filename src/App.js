@@ -108,6 +108,26 @@ class App extends React.Component{
             })
         })
     }
+
+                        //itemCreate nested 
+    // newlyCreatedItem => {id: 9, name: "CC", list_id: 2}
+    addItemToOneList = (newlyCreatedItem) => {
+        let foundList = this.state.masterList.find((list) => {
+            return list.id === newlyCreatedItem.list_id //=>{id: 2, list_name: "Chicken that won an Oscar", contribution: 784, items: Array(8)}
+        })
+        let copyOfItemsFromFoundList = [...foundList.items, newlyCreatedItem]  //=> (9) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {newlyCreatedItem}]
+        let coptOfFoundList = {...foundList, items: copyOfItemsFromFoundList} //=> {id: 2, list_name: "Chicken that won an Oscar", contribution: 784, items: Array(9)}
+        
+                    //change entire masterList 
+        let copyOfMasterList = this.state.masterList.map((singleList) =>{
+            return (singleList.id === coptOfFoundList.id ? coptOfFoundList : singleList)
+        })
+        // debugger
+        this.setState({
+            masterList: copyOfMasterList
+        })
+
+    }
   
     
 
@@ -115,7 +135,7 @@ class App extends React.Component{
   render() {
     // console.log(this.decideWhichArrayToReturn()) => [{...}]
     // console.log(this.decideWhichArrayToReturn())
-
+        console.log(this.state.masterList)
     return (
       <div className="App">
         <h1>Listings</h1>
@@ -131,6 +151,7 @@ class App extends React.Component{
             lists={this.decideWhichArrayToReturn()}
             deleteAlist={this.deleteAlist}
             updateOneList={this.updateOneList}
+            addItemToOneList={this.addItemToOneList}
         />
     
       </div>

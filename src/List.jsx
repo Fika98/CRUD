@@ -1,4 +1,5 @@
 import React from 'react'
+import Item from './Item'
 
 
 
@@ -50,6 +51,7 @@ class List extends React.Component{
   }
   
   render(){
+    //   console.log(this.props)
     let {list_name, items, contribution} = this.props.lists
     // console.log(this.props.lists)
     let arrayOfItems = items.map((itemObj) => {
@@ -74,10 +76,15 @@ class List extends React.Component{
               ?
               <ol>
               {arrayOfItems}
+              <Item 
+              itemId={this.props.lists.id}
+              addItemToOneList={this.props.addItemToOneList}
+              />
               </ol>
               :
               null
             }
+            
             <button className = "contriBtn"
               onClick = { this.handleContriibution }
 

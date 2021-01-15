@@ -72,5 +72,18 @@
 
 
 
+.itemDiv{
+    background-color: #FED9DC;
+    border: red;
+    padding: 20px;
+    width: 250px;
+    margin: auto;
+    border: 3px solid pink;
+}
 
-
+.addItem{
+    background-color: #32CD32;
+    color: white;
+    font-size: 16px;
+    margin: 8px;
+}
