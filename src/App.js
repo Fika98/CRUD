@@ -20,7 +20,7 @@ class App extends React.Component{
         //[evt.target.name]:evt.target.value  and change termfromchild to evt
     })
   }
-
+            //when we invoke a FUNCTION WE CARE ABOUT RETURN VALUE
   decideWhichArrayToReturn = () => {
     let  anArray = this.state.masterList.filter((singleList) => {
          return singleList.list_name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
@@ -63,7 +63,7 @@ class App extends React.Component{
             //delete
   deleteAlist = (idOfListToDelete) => {
     fetch(`http://localhost:3000/lists/${idOfListToDelete}`, {
-        method: "DELETE"
+      method: "DELETE"
     })
         .then(r => r.json())
         .then((deletedList) => {
@@ -186,3 +186,4 @@ export default App;
   //needs to have a render function
   //need to return one bit of JSX
   //you have access to props via this.props
+

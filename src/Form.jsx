@@ -24,7 +24,7 @@ class Form extends React.Component{
     render(){
         // console.log(this.props.creditCard("data from child"))
         // console.log(this.props.addOneList)
-
+        // let {list_name} = this.state
         return(
             <form className="form" onSubmit={this.handleSubmit}>
                 <label htmlFor="name">Name:</label>
@@ -33,7 +33,7 @@ class Form extends React.Component{
                 name="list_name" 
                 id ="l_name"
                 autoComplete="off"
-                value={this.state.list_name}
+                value={this.state.list_name} //list_name
                 /* Value is state controlling the input */
                 /* onChange is input controlling the state */
                 onChange={this.handleAllInput}

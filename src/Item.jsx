@@ -1,8 +1,8 @@
 import React from 'react'
 
-class Item extends React.Component{
-    state = {
-        nameOfNewItem: ""
+class Item extends React.Component {
+  state = {
+    nameOfNewItem: ""
     }
 
     handleNewInput = (evt) => {
@@ -30,25 +30,25 @@ class Item extends React.Component{
             .then((newItem) => {
                 this.props.addItemToOneList(newItem)
             })
-        }
+    }
 
-      render(){
+    render() {
         //   console.log(this.props)
-        return(
+        return (
             <div className="itemDiv">
                 <form onSubmit={this.handleSubmitOfNewItem}>
-                    <input 
-                      type ="text" 
-                      name="nameOfNewItem" 
-                      autoComplete="off"
-                      value={this.state.nameOfNewItem}
-                      onChange={this.handleNewInput}
-                      />
-                    <input 
-                      type="submit" 
-                      value="Add Item" 
-                      className="addItem"
-                      />
+                    <input
+                        type="text"
+                        name="nameOfNewItem"
+                        autoComplete="off"
+                        value={this.state.nameOfNewItem}
+                        onChange={this.handleNewInput}
+                    />
+                    <input
+                        type="submit"
+                        value="Add Item"
+                        className="addItem"
+                    />
                 </form>
             </div>
         )
